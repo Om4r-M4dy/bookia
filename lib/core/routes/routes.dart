@@ -15,9 +15,15 @@ class Routes {
   static final routes = GoRouter(
     routes: [
       GoRoute(path: splash, builder: (context, state) => const SplashScreen()),
-      GoRoute(path: welcome, builder: (context, state) => const WelcomeScreen()),
+      GoRoute(
+        path: welcome,
+        builder: (context, state) => const WelcomeScreen(),
+      ),
       GoRoute(path: login, builder: (context, state) => const LoginScreen()),
-      GoRoute(path: register, builder: (context, state) => const RegisterScreen()),
+      GoRoute(
+        path: register,
+        builder: (context, state) => const RegisterScreen(),
+      ),
     ],
   );
 }
