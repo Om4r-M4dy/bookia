@@ -7,9 +7,9 @@ class Data {
   Data({this.user, this.token});
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    user: json['user'] == null
-        ? null
-        : User.fromJson(json['user'] as Map<String, dynamic>),
+    user: json['user'] != null
+        ? User.fromJson(json['user'] as Map<String, dynamic>)
+        : (json['id'] != null ? User.fromJson(json) : null),
     token: json['token'] as String?,
   );
 

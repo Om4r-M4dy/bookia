@@ -2,13 +2,13 @@ import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/navigations.dart';
 import 'package:bookia/core/functions/validations.dart';
 import 'package:bookia/core/routes/routes.dart';
+import 'package:bookia/core/styles/colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_svg_picture.dart';
 import 'package:bookia/core/widgets/inputs/custom_text_form_field.dart';
 import 'package:bookia/core/widgets/dialogs.dart';
 import 'package:bookia/core/widgets/main_button.dart';
 import 'package:bookia/core/widgets/my_body_view.dart';
-import 'package:bookia/core/widgets/inputs/password_text_form_field.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_state.dart';
 import 'package:bookia/features/auth/presentation/widgets/auth_footer.dart';
@@ -16,15 +16,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+class ForgotPasswordScreen extends StatelessWidget {
+  const ForgotPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state is AuthSuccessState) {
-          removeUntil(context, Routes.main);
+        if (state is ForgotPassSuccessState) {
+          pop(context);
+          pushTo(context, Routes.otpVerification, extra: context.read<AuthCubit>().emailController.text);
         } else if (state is AuthErrorState) {
           pop(context);
           showErrorDialog(context, state.massage);
@@ -48,8 +49,8 @@ class RegisterScreen extends StatelessWidget {
         ),
         body: _registerBody(context),
         bottomNavigationBar: AuthFooter(
-          text: "Already have an account?",
-          buttonText: 'Sign In',
+          text: "Remember Password?",
+          buttonText: 'Login',
           onTap: () {
             replaceWith(context, Routes.login);
           },
@@ -68,24 +69,18 @@ class RegisterScreen extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                'Hello! Register to get started',
+                'Forgot Password?',
                 style: TextStyles.headline,
+              ),
+              Gap(10),
+              Text(
+                "Don't worry! It occurs. Please enter the email address linked with your account.",
+                style: TextStyles.body.copyWith(color: AppColors.greyColor),
               ),
               Gap(32),
               CustomTextFormField(
-                controller: cubit.userNameController,
-                hintText: 'Full Name',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter yor full name';
-                  }
-                  return null;
-                },
-              ),
-              Gap(12),
-              CustomTextFormField(
                 controller: cubit.emailController,
-                hintText: 'Email',
+                hintText: 'Enter your email',
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter yor email';
@@ -96,37 +91,12 @@ class RegisterScreen extends StatelessWidget {
                 },
                 keyboardType: TextInputType.emailAddress,
               ),
-              Gap(12),
-              PasswordTextFormField(
-                controller: cubit.passwordController,
-                hintText: 'Password',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  if (value.length < 6) {
-                    return 'Password must be at least 6 characters long';
-                  }
-                  return null;
-                },
-              ),
-              Gap(12),
-              PasswordTextFormField(
-                controller: cubit.passwordConfirmationController,
-                hintText: 'Confirm Password',
-                validator: (value) {
-                  if (value != cubit.passwordController.text) {
-                    return 'Passwords do not match';
-                  }
-                  return null;
-                },
-              ),
               Gap(30),
               MainButton(
-                text: 'Register',
+                text: 'Send Code',
                 onPressed: () {
                   if (cubit.formKey.currentState!.validate()) {
-                    cubit.register();
+                    cubit.forgotPassword();
                   }
                 },
               ),
