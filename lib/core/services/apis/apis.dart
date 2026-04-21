@@ -13,4 +13,9 @@ class Apis {
   static const String sliders = 'sliders';
   static const String productsBestseller = 'products-bestseller';
   static const String productsSearch = 'products-search';
+
+  //wishlist
+  static const String wishlist = 'wishlist';
+  static const String addToWishlist = 'add-to-wishlist';
+  static const String removeFromWishlist = 'remove-from-wishlist';
 }

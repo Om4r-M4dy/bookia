@@ -18,4 +18,4 @@ class SearchCubit extends Cubit<SearchState> {
       emit(SearchErrorState());
     }
   }
-} 
+}

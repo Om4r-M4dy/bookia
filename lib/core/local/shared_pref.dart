@@ -8,9 +8,34 @@ class SharedPref {
 
   static const String kToken = 'token';
   static const String kUSer = 'user';
+  static const String kWishlistIds = 'wishlist_ids';
 
   static Future<void> init() async {
     prefs = await SharedPreferences.getInstance();
+  }
+
+  static Future<void> setWishlistIds(List<String> ids) async {
+    await prefs.setStringList(kWishlistIds, ids);
+  }
+
+  static List<String> getWishlistIds() {
+    return prefs.getStringList(kWishlistIds) ?? [];
+  }
+
+  static Future<void> addWishlistId(String id) async {
+    var ids = getWishlistIds();
+    if (!ids.contains(id)) {
+      ids.add(id);
+      await prefs.setStringList(kWishlistIds, ids);
+    }
+  }
+
+  static Future<void> removeWishlistId(String id) async {
+    var ids = getWishlistIds();
+    if (ids.contains(id)) {
+      ids.remove(id);
+      await prefs.setStringList(kWishlistIds, ids);
+    }
   }
 
   static Future<void> saveUserInfo(User? user) async {

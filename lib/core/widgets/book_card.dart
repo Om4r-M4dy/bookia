@@ -9,17 +9,28 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class BookCard extends StatelessWidget {
-  const BookCard({super.key, required this.book, required this.heroTag});
+  const BookCard({
+    super.key,
+    required this.book,
+    required this.heroTag,
+    this.onRemovePressed,
+    this.onRefresh,
+  });
   final String heroTag;
   final Product book;
+  final VoidCallback? onRemovePressed;
+  final VoidCallback? onRefresh;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        pushTo(context, Routes.details, extra: {
-          'book': book,
-          'heroTag': heroTag,
+        pushTo(
+          context,
+          Routes.details,
+          extra: {'book': book, 'heroTag': heroTag},
+        ).then((value) {
+          onRefresh?.call();
         });
       },
       child: Container(
@@ -56,14 +67,21 @@ class BookCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('₹${book.priceAfterDiscount}', style: TextStyles.body),
-                MainButton(
-                  minWidth: 72,
-                  minHeight: 28,
-                  bgColor: AppColors.darkColor,
-                  text: 'buy',
-                  onPressed: () {},
-                ),
+                Text('₹${book.priceAfterDiscount ?? book.price}', style: TextStyles.body),
+                onRemovePressed != null
+                    ? IconButton(
+                        padding: EdgeInsets.zero,
+                        constraints: BoxConstraints(),
+                        onPressed: onRemovePressed,
+                        icon: Icon(Icons.close, size: 18),
+                      )
+                    : MainButton(
+                        minWidth: 72,
+                        minHeight: 28,
+                        bgColor: AppColors.darkColor,
+                        text: 'buy',
+                        onPressed: () {},
+                      ),
               ],
             ),
           ],

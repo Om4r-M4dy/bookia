@@ -22,7 +22,7 @@ class _HomeSliderState extends State<HomeSlider> {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         var sliders = context.read<HomeCubit>().sliders;
-        if (state is HomeLoadingState || state is HomeInitialState) {
+        if (state is! HomeSuccessState) {
           return const CarouselShimmer();
         }
         return Column(

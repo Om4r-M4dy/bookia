@@ -6,6 +6,7 @@ import 'package:bookia/core/widgets/custom_svg_picture.dart';
 import 'package:bookia/core/widgets/main_button.dart';
 import 'package:bookia/core/widgets/my_body_view.dart';
 import 'package:bookia/features/Home/data/models/best_seller_response/product.dart';
+import 'package:bookia/features/details/widgets/add_to_wishlist/add_to_wishlist_action.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -31,12 +32,7 @@ class DetailsScreen extends StatelessWidget {
             ),
           ],
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: CustomSvgPicture(path: AppImages.bookmarkSvg),
-          ),
-        ],
+        actions: [AddToWishlistAction(productId: book.id ?? 0)],
       ),
       body: _detailsBody(context),
       bottomNavigationBar: Padding(

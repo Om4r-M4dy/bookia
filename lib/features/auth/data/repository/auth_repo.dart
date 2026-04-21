@@ -103,9 +103,7 @@ class AuthRepo {
 
   static Future<AuthResponse?> resendVerifyCode() async {
     try {
-      var response = await DioProvider.get(
-        endpoint: Apis.resendVerifyCode,
-      );
+      var response = await DioProvider.get(endpoint: Apis.resendVerifyCode);
       if (response.statusCode == 200) {
         var data = AuthResponse.fromJson(response.data);
         return data;

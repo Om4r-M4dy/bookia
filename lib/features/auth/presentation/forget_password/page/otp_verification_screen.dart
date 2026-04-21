@@ -3,7 +3,7 @@ import 'package:bookia/core/functions/navigations.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
-import 'package:bookia/core/widgets/custom_svg_picture.dart'; 
+import 'package:bookia/core/widgets/custom_svg_picture.dart';
 import 'package:bookia/core/widgets/dialogs.dart';
 import 'package:bookia/core/widgets/main_button.dart';
 import 'package:bookia/core/widgets/my_body_view.dart';
@@ -41,18 +41,16 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
           pushTo(
             context,
             Routes.resetPassword,
-            extra: {
-              'otp': cubit.pinController.text,
-            },
+            extra: {'otp': cubit.pinController.text},
           );
         } else if (state is ResendCodeSuccessState) {
-          pop(context); 
+          pop(context);
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Code resent successfully')),
           );
         } else if (state is AuthErrorState) {
           pop(context);
-          showErrorDialog(context, state.massage);
+          showMessageDialog(context, state.massage);
         } else if (state is AuthLoadingState) {
           showLoadingDialog(context);
         }
@@ -92,10 +90,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
           autovalidateMode: AutovalidateMode.onUnfocus,
           child: Column(
             children: [
-              Text(
-                'OTP Verification',
-                style: TextStyles.headline,
-              ),
+              Text('OTP Verification', style: TextStyles.headline),
               Gap(10),
               Text(
                 "Enter the verification code we just sent on your email address.",
@@ -103,42 +98,45 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               ),
               Gap(32),
               Pinput(
-                    controller: cubit.pinController,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    length: 4,
-                    defaultPinTheme: PinTheme(
-                      width: 48,
-                      height: 60,
-                      textStyle: TextStyles.subtitle1.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppColors.accentColor,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(width: 1 ,color: AppColors.borderColor),
-                      ),
-                    ),
-                    submittedPinTheme: PinTheme(
-                      width: 48,
-                      height: 60,
-                      textStyle: TextStyles.subtitle1.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppColors.backgroundColor,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(width: 1.2 ,color: AppColors.primaryColor),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value!.isEmpty == true) {
-                        return 'Please enter the verification code';
-                      } else if (value.length < 4) {
-                        return 'Please enter a valid verification code';
-                      }
-                      return null;
-                    },
+                controller: cubit.pinController,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                length: 4,
+                defaultPinTheme: PinTheme(
+                  width: 48,
+                  height: 60,
+                  textStyle: TextStyles.subtitle1.copyWith(
+                    fontWeight: FontWeight.w700,
                   ),
+                  decoration: BoxDecoration(
+                    color: AppColors.accentColor,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(width: 1, color: AppColors.borderColor),
+                  ),
+                ),
+                submittedPinTheme: PinTheme(
+                  width: 48,
+                  height: 60,
+                  textStyle: TextStyles.subtitle1.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.backgroundColor,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      width: 1.2,
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                ),
+                validator: (value) {
+                  if (value!.isEmpty == true) {
+                    return 'Please enter the verification code';
+                  } else if (value.length < 4) {
+                    return 'Please enter a valid verification code';
+                  }
+                  return null;
+                },
+              ),
               Gap(30),
               MainButton(
                 text: 'Verify',

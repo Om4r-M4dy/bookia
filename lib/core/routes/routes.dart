@@ -2,7 +2,7 @@ import 'package:bookia/features/Home/data/models/best_seller_response/product.da
 import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/forget_password/page/forgot_password_screen.dart';
 import 'package:bookia/features/auth/presentation/forget_password/page/password_changed.dart';
-import 'package:bookia/features/auth/presentation/forget_password/page/top_verification_screen.dart';
+import 'package:bookia/features/auth/presentation/forget_password/page/otp_verification_screen.dart';
 import 'package:bookia/features/auth/presentation/forget_password/page/reset_password_screen.dart';
 import 'package:bookia/features/auth/presentation/login_register/page/login_screen.dart';
 import 'package:bookia/features/auth/presentation/login_register/page/register_screen.dart';

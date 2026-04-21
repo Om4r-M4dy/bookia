@@ -25,10 +25,14 @@ class ForgotPasswordScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is ForgotPassSuccessState) {
           pop(context);
-          pushTo(context, Routes.otpVerification, extra: context.read<AuthCubit>().emailController.text);
+          pushTo(
+            context,
+            Routes.otpVerification,
+            extra: context.read<AuthCubit>().emailController.text,
+          );
         } else if (state is AuthErrorState) {
           pop(context);
-          showErrorDialog(context, state.massage);
+          showMessageDialog(context, state.massage);
         } else if (state is AuthLoadingState) {
           showLoadingDialog(context);
         }
@@ -68,10 +72,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           autovalidateMode: AutovalidateMode.onUnfocus,
           child: Column(
             children: [
-              Text(
-                'Forgot Password?',
-                style: TextStyles.headline,
-              ),
+              Text('Forgot Password?', style: TextStyles.headline),
               Gap(10),
               Text(
                 "Don't worry! It occurs. Please enter the email address linked with your account.",

@@ -27,7 +27,7 @@ class RegisterScreen extends StatelessWidget {
           removeUntil(context, Routes.main);
         } else if (state is AuthErrorState) {
           pop(context);
-          showErrorDialog(context, state.massage);
+          showMessageDialog(context, state.massage);
         } else if (state is AuthLoadingState) {
           showLoadingDialog(context);
         }

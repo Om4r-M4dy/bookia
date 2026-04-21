@@ -5,7 +5,13 @@ class AuthParams {
   String? passwordConfirmation;
   int? verifyCode;
 
-  AuthParams({this.name, this.email, this.password, this.passwordConfirmation, this.verifyCode});
+  AuthParams({
+    this.name,
+    this.email,
+    this.password,
+    this.passwordConfirmation,
+    this.verifyCode,
+  });
 
   Map<String, dynamic> toJson() {
     return {

@@ -3,7 +3,7 @@ import 'package:bookia/core/functions/navigations.dart';
 import 'package:bookia/core/widgets/custom_svg_picture.dart';
 import 'package:bookia/core/widgets/my_body_view.dart';
 import 'package:bookia/core/widgets/shimmer/grid_shimmer.dart';
-import 'package:bookia/features/Home/presentation/widgets/book_card.dart';
+import 'package:bookia/core/widgets/book_card.dart';
 import 'package:bookia/features/search/presentation/cubit/search_cubit.dart';
 import 'package:bookia/features/search/presentation/cubit/search_state.dart';
 import 'package:flutter/material.dart';

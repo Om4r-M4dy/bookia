@@ -46,9 +46,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> forgotPassword() async {
     emit(AuthLoadingState());
-    var params = AuthParams(
-      email: emailController.text,
-    );
+    var params = AuthParams(email: emailController.text);
     var data = await AuthRepo.forgetPassword(params);
     if (data != null) {
       emit(ForgotPassSuccessState());

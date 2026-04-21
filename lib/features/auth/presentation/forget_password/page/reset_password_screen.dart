@@ -40,7 +40,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           pushTo(context, Routes.passwordChanged);
         } else if (state is AuthErrorState) {
           pop(context);
-          showErrorDialog(context, state.massage);
+          showMessageDialog(context, state.massage);
         } else if (state is AuthLoadingState) {
           showLoadingDialog(context);
         }
