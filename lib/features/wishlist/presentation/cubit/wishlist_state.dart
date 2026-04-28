@@ -13,4 +13,3 @@ class WishlistErrorState extends WishlistState {
   final String error;
   WishlistErrorState({required this.error});
 }
-

@@ -67,7 +67,10 @@ class BookCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('₹${book.priceAfterDiscount ?? book.price}', style: TextStyles.body),
+                Text(
+                  '₹${book.priceAfterDiscount ?? book.price}',
+                  style: TextStyles.body,
+                ),
                 onRemovePressed != null
                     ? IconButton(
                         padding: EdgeInsets.zero,

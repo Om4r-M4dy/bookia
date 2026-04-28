@@ -3,9 +3,9 @@ import 'package:bookia/core/functions/navigations.dart';
 import 'package:bookia/core/styles/colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_svg_picture.dart';
-import 'package:bookia/core/widgets/main_button.dart';
 import 'package:bookia/core/widgets/my_body_view.dart';
 import 'package:bookia/features/Home/data/models/best_seller_response/product.dart';
+import 'package:bookia/features/details/widgets/add_to_cart/add_cart_button.dart';
 import 'package:bookia/features/details/widgets/add_to_wishlist/add_to_wishlist_action.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -40,13 +40,11 @@ class DetailsScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('₹${book.priceAfterDiscount}', style: TextStyles.body),
-            MainButton(
-              minWidth: 212,
-              bgColor: AppColors.darkColor,
-              text: 'Add to cart',
-              onPressed: () {},
+            Text(
+              '₹${book.priceAfterDiscount ?? book.price}',
+              style: TextStyles.body,
             ),
+            AddCartButton(bookId: book.id ?? 0),
           ],
         ),
       ),
